@@ -20,8 +20,8 @@ services:
     depends_on:
       - database
     networks:
-      - backend
-      - frontend
+      - public
+      - internal
     volumes:
       - wp-data:/var/www/html
       - ./wp/uploads:/var/www/html/wp-content/uploads:rw
@@ -79,7 +79,6 @@ services:
       - ./nginx:/etc/nginx/conf.d/:ro
       - ./ssl:/etc/letsencrypt/live/website.uk:delegated
     environment:
-      - API_KEY=${AMPLIFY_API_KEY}
       - NGINX_HOST=${APP_HOST:-www.website.uk}
       - NGINX_PORT=443
       - TZ=Europe/London
