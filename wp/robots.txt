@@ -1,0 +1,12 @@
+User-agent: *
+
+Disallow: /*.png$
+Disallow: /*.jpg$
+Disallow: /*.gif$
+Disallow: /cgi-bin/
+Disallow: /wp-admin/
+
+Allow: /*.pdf$
+Allow: /
+
+Sitemap: https://www.website.uk/sitemap.xml

@@ -1,0 +1,16 @@
+* TEAM */
+Web developer: Marius CUCURUZ
+Description: Full-Stack Software Engineer
+About: https://linktr.ee/marius.himself
+Web: https://www.marius.uk/
+YouTube: @Marius.Cucuruz
+Twitter: @MariusCucuruz
+Email: marius.cucuruz[at]gmail.com
+From: London, United Kingdom
+
+/* SITE */
+Last update: 2026/03/17
+Launch date: 2026/03/17
+Language: English
+Doctype: HTML5
+IDE: VSCode, Vim
