@@ -1,0 +1,3 @@
+- Please see the documentation below on how to create a connection with AEM.
+-
+- Read more: <a class="text-white" target="_blank" rel="noreferrer" href="https://support.medialakeapp.com/en">AEM documentation coming soon</a>

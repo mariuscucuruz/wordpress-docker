@@ -1,0 +1,13 @@
+{
+    "name": "vendor/wp-dam-importer",
+    "autoload": {
+        "psr-4": {
+            "MariusCucuruz\\DAMImporter\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}

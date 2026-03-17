@@ -1,0 +1,3 @@
+- Please see the documentation below on how to create a connection with Dropbox.
+- 
+- Read more: <a class="text-white" target="_blank" rel="noreferrer" href="https://intercom.help/medialakeai/en/articles/7990239-setting-up-dropbox-integration">Dropbox documentation</a>
