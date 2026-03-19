@@ -2,7 +2,7 @@ version: '3'
 services:
   frontend:
     restart: unless-stopped
-    container_name: damimporter_wp
+    container_name: wordpressdev_wp
     build:
       context: .
       dockerfile: ./docker/wp/Dockerfile
@@ -27,7 +27,7 @@ services:
       - ./wp:/var/www/html/wp-content:delegated
       - ./docker/php/:/usr/local/etc/php/conf.d/
     environment:
-      - WORDPRESS_DOMAIN="https://${APP_HOST:-damimporter.localhost}/"
+      - WORDPRESS_DOMAIN="https://${APP_HOST:-wordpressdev.localhost}/"
       - WORDPRESS_DB_HOST=${DB_HOST:-database}
       - WORDPRESS_DB_PORT=${DB_PORT:-3306}
       - WORDPRESS_DB_NAME=${DB_NAME:-wordpress}
@@ -41,12 +41,12 @@ services:
       - WORDPRESS_CONFIG_EXTRA=
           define('FS_METHOD', 'direct');
           define('WP_ALLOW_REPAIR', 'repair');
-          define('WP_HOME', 'https://${APP_HOST:-damimporter.localhost}:${HOST_PORT:-8011}/');
-          define('WP_SITEURL', 'https://${APP_HOST:-damimporter.localhost}:${HOST_PORT:-8011}/');
+          define('WP_HOME', 'https://${APP_HOST:-wordpressdev.localhost}:${HOST_PORT:-8011}/');
+          define('WP_SITEURL', 'https://${APP_HOST:-wordpressdev.localhost}:${HOST_PORT:-8011}/');
       - TZ=Europe/London
 
   database:
-    container_name: damimporter_db
+    container_name: wordpressdev_db
     image: mariadb:latest
     restart: always
     networks:
@@ -65,7 +65,7 @@ services:
       - TZ=Europe/London
 
   proxy:
-    container_name: damimporter_proxy
+    container_name: wordpressdev_proxy
     image: nginx:latest
     restart: unless-stopped
     tty: true
@@ -81,7 +81,7 @@ services:
       - ./docker/nginx:/etc/nginx/conf.d/:ro
       - ./docker/ssl:/etc/ssl:delegated
     environment:
-      - NGINX_HOST=${APP_HOST:-damimporter.localhost}
+      - NGINX_HOST=${APP_HOST:-wordpressdev.localhost}
       - NGINX_PORT=443
       - TZ=Europe/London
 

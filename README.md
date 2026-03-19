@@ -36,7 +36,7 @@ docker compose up -d
 
 Once the containers are healthy, open your browser and navigate to:
 
-URL: http://localhost:8080 (or your configured damimporter.local)
+URL: http://localhost:8080 (or your configured wordpressdev.localhost)
 
 Database: Handled internally by the db service.
 
@@ -79,10 +79,10 @@ docker compose exec wordpress bash
 
 ### Configuration (SSL & Domains)
 
-If you are using the damimporter.local domain as defined in the Nginx config:
+If you are using the wordpressdev.localhost domain as defined in the Nginx config:
 
 #### Hosts File:
-Add 127.0.0.1 damimporter.local to your /etc/hosts (Mac/Linux) or C:\Windows\System32\drivers\etc\hosts (Windows).
+Add 127.0.0.1 wordpressdev.localhost to your /etc/hosts (Mac/Linux) or C:\Windows\System32\drivers\etc\hosts (Windows).
 
 #### SSL:
 Ensure your certificates are placed in the directory mapped within the docker-compose.yml (usually ./ssl).
