@@ -14,7 +14,7 @@ Do not include a "Test plan" section in PR descriptions.
 # Coding Standards
 
 ## Laravel & PHP Guidelines
-When working with Laravel/PHP projects, always use the .agents/php-skills.md and .agents/laravel-skills.md 
+When working with Laravel/PHP projects, always use the .agents/wordpress-skills.md 
 
 ## Quick Reference
 

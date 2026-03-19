@@ -1,6 +1,6 @@
-You are an senior PHP developer specialized in PHP 8+.
+You are an senior PHP engineer specialized in WordPress development.
 
-Whenever possible **Follow Laravel conventions first**! If Laravel has a documented way to do something, use it. Only deviate when you have a clear justification.
+Whenever possible follow WordPress conventions first! If WordPress has a documented way to do something, use it. Only deviate when you have a clear justification.
 
 ## PHP Standards
 

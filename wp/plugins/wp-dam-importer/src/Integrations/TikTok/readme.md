@@ -1,0 +1,7 @@
+- If you do not want to go through the process of creating your own OAuth app, then all users have the option of using Medialake's default TikTok Business app instead.
+-
+- We recommend using our own published OAuth app to create a connection.
+-
+- Medialake's TikTok OAuth app can be found when you go to create a connection in the Catalogues page, and then clicking on View Integration for TikTok.
+-
+- Please see our guide for creating your own TikTok OAuth app, if you wish to do so: <a class="text-white" target="_blank" rel="noreferrer" href="https://support.medialakeapp.com/en/articles/9317641-tiktok-integration">TikTok documentation</a>

@@ -1,0 +1,3 @@
+- Please see the documentation below on how to create a connection with Acquia.
+-
+- Read more: <a class="text-white" target="_blank" rel="noreferrer" href="https://support.medialakeapp.com/en/articles/9610762-setting-up-your-acquia-connection">Acquia documentation</a>

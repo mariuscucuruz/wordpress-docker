@@ -1,0 +1,3 @@
+- Please see the documentation below on how to create a connection with Bynder.
+-
+- Read more: <a class="text-white" target="_blank" rel="noreferrer" href="https://support.medialakeapp.com/en">Bynder documentation coming soon</a>

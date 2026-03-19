@@ -1,11 +1,14 @@
 # WordPress
 wp-config.php
-wp/uploads/
 wp/backup-*
 wp/advanced-cache.php
 wp/object-cache.php
 wp/db.php
 wp/plugins/hello.php
+wp/plugins/akismet/
+wp/upupgrade-temp-backuploads/*
+wp/upgrade/*
+!wp/uploads/
 
 # WordPress multisite
 wp/blogs.dir/
