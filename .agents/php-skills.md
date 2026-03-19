@@ -143,22 +143,6 @@ $failedChecks = $site->checks()->where('status', 'failed')->get();
 - No extra empty lines between `{}` brackets
 - Let code "breathe" - avoid cramped formatting
 
-## Validation
-- Use array notation for multiple rules (easier for custom rule classes):
-  ```php
-  public function rules() {
-      return [
-          'email' => ['required', 'email'],
-      ];
-  }
-  ```
-- Custom validation rules use snake_case:
-  ```php
-  Validator::extend('organisation_type', function ($attribute, $value) {
-      return OrganisationType::isValid($value);
-  });
-  ```
-
 ## Testing
 
 - Keep test classes in same file when possible
