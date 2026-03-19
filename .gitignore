@@ -1,0 +1,65 @@
+# WordPress
+wp-config.php
+wp/backup-*
+wp/advanced-cache.php
+wp/object-cache.php
+wp/db.php
+wp/plugins/hello.php
+wp/plugins/akismet/
+wp/upupgrade-temp-backuploads/*
+wp/upgrade/*
+!wp/uploads/
+
+# WordPress multisite
+wp/blogs.dir/
+
+# WordPress logs
+wp/debug.log
+
+# Uploads
+wp/uploads/*
+!wp/uploads/.htaccess
+
+# Plugins and Themes
+wp/plugins/*
+!wp/plugins/.gitkeep
+wp/themes/*
+!wp/themes/.gitkeep
+
+# Database
+*.sql
+*.sql.gz
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Composer
+vendor/
+composer.lock
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Docker
+.dockerignore
+Dockerfile
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Misc
+*.log
+*.pot
