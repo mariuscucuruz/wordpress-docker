@@ -1,57 +1,57 @@
 version: '3'
-
 services:
   frontend:
-    container_name: wordpress
+    container_name: damimporter_wp
     image: wordpress:6.4-fpm
     restart: unless-stopped
-    build:
-      context: .
-      dockerfile: ./docker/wp/Dockerfile
-      args:
-        - UID=${UID:-(id -u)}
-        - GID=${GID:-(id -g)}
-        - WEBUSER=${WEBUSER:-(id -un)}
-        - WEBGROUP=${WEBGROUP:-(id -gn)}
+    # build:
+    #   context: .
+    #   dockerfile: ./docker/wp/Dockerfile
+    #   args:
+    #     - UID=${UID:-(id -u)}
+    #     - GID=${GID:-(id -g)}
+    #     - WEBUSER=${WEBUSER:-(id -un)}
+    #     - WEBGROUP=${WEBGROUP:-(id -gn)}
     ports:
-      - 9000:9000
+      # - "${APP_PORT:-9000}:9000"
+      - "${APP_PORT:-8080}:80"
     links:
       - database
     depends_on:
       - database
     networks:
-      - backend
-      - frontend
+      - public
+      - internal
     volumes:
       - wp-data:/var/www/html
-      - ./wp/uploads:/var/www/html/wp-content/uploads:delegated
-      - ./wp/plugins:/var/www/html/wp-content/plugins:delegated
+      - ./wp/uploads:/var/www/html/wp-content/uploads:rw
       #- ./wp/themes:/var/www/html/wp-content/themes:rw
-      - ./php/:/usr/local/etc/php/conf.d/:ro
+      - ./wp/plugins:/var/www/html/wp-content/plugins:rw
+      - ./php/:/usr/local/etc/php/conf.d/
     environment:
-      - WORDPRESS_DOMAIN="https://${APP_HOST:-website.uk}/"
+      - WORDPRESS_DOMAIN="https://${APP_HOST:-damimporter.local}/"
       - WORDPRESS_DB_HOST=${DB_HOST:-database}
       - WORDPRESS_DB_PORT=${DB_PORT:-3306}
       - WORDPRESS_DB_NAME=${DB_NAME:-wordpress}
       - WORDPRESS_DB_USER=${DB_USERNAME:-wpdbuser}
       - WORDPRESS_DB_PASSWORD=${DB_PASSWORD:-wpdbpassword}
-      - WORDPRESS_DEBUG=true
-      - WP_DEBUG_LOG=true
+      - WORDPRESS_DEBUG=${WORDPRESS_DEBUG:-true}
+      - WP_DEBUG_LOG={WORDPRESS_DEBUG:-true}
       - WORDPRESS_CONFIG_EXTRA=
           define('FS_METHOD', 'direct');
-          define('WP_HOME', 'https://${APP_HOST:-website.uk}/');
-          define('WP_SITEURL', 'https://${APP_HOST:-website.uk}/');
+          define('WP_HOME', 'https://${APP_HOST:-damimporter.local}/');
+          define('WP_SITEURL', 'https://${APP_HOST:-damimporter.local}/');
       - TZ=Europe/London
 
   database:
-    container_name: database
-    image: mysql:latest
-    restart: unless-stopped
+    container_name: damimporter_db
+    image: mariadb:latest
+    restart: always
     networks:
-      - backend
-    command: [
-      "--explicit_defaults_for_timestamp"
-    ]
+      - internal
+    # command: [
+    #   "--explicit_defaults_for_timestamp"
+    # ]
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
       - db-data:/var/lib/mysql
@@ -63,7 +63,7 @@ services:
       - TZ=Europe/London
 
   proxy:
-    container_name: proxy
+    container_name: damimporter_proxy
     image: nginx:latest
     restart: unless-stopped
     tty: true
@@ -72,16 +72,16 @@ services:
       - 10543:443
       - :443
     networks:
-      - backend
-      - frontend
-    depends_on:
-      - frontend
+      - internal
+      - public
     volumes_from:
       - frontend
     volumes:
-      - ./nginx:/etc/nginx/conf.d/:ro
-      - ./ssl:/etc/letsencrypt/live/website.uk:delegated
+      - ./docker/nginx:/etc/nginx/conf.d/:ro
+      - ./docker/ssl:/etc/letsencrypt/live/damimporter.local:delegated
     environment:
+      - NGINX_HOST=${APP_HOST:-www.damimporter.local}
+      - NGINX_PORT=443
       - TZ=Europe/London
 
 volumes:
@@ -89,8 +89,8 @@ volumes:
   db-data:
 
 networks:
-  backend:
+  public:
     driver: bridge
-  frontend:
+  internal:
     driver: bridge
 
