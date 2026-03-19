@@ -1,3 +1,0 @@
-- Please see the documentation below on how to create a connection with Peach.
-- 
-- Read more: <a class="text-white" target="_blank" rel="noreferrer" href="https://support.medialakeapp.com/en/articles/8227656-setting-up-peach-oauth-app">Peach documentation</a>

@@ -1,3 +1,0 @@
-- Please see the documentation below on how to create a connection with Google Drive.
-- 
-- Read more: <a class="" target="_blank" rel="noreferrer" href="https://intercom.help/medialakeai/en/articles/7990246-setting-up-google-drive-integration">Google Drive documentation</a>

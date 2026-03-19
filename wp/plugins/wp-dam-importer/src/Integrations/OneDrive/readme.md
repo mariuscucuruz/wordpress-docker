@@ -1,3 +1,0 @@
-- Please see the documentation below on how to create a connection with OneDrive.
--
-- Read more: <a class="text-white" target="_blank" rel="noreferrer" href="https://support.medialakeapp.com/en">OneDrive documentation coming soon</a>

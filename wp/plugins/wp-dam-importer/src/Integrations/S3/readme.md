@@ -1,3 +1,0 @@
-- Please see the documentation below on how to create a connection with S3.
--
-- Read more: <a class="text-white" target="_blank" rel="noreferrer" href="https://support.medialakeapp.com/en">S3 documentation coming soon</a>

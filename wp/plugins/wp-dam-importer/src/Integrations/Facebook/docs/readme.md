@@ -1,7 +1,0 @@
-- If you do not want to go through the process of creating your own OAuth app, then all users have the option of using Medialake's default Facebook Business app instead.
--
-- We recommend using our own published OAuth app to create a connection, as this means you will only have to refresh your access tokens once per year, instead of once per week which is mandated by Meta for apps in development mode.
--
-- Medialake's OAuth app can be found when you go to create a connection in the Catalogues page, and then clicking on View Integration for Facebook.
--
-- Please see our guide for creating your own Facebook OAuth app, if you wish to do so: <a class="text-white" target="_blank" rel="noreferrer" href="https://support.medialakeapp.com/en/articles/8227923-setting-up-facebook-oauth-app">Facebook documentation</a>

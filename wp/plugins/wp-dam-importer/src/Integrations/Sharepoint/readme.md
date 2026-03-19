@@ -1,3 +1,0 @@
-- Please see the documentation below on how to create a connection with Sharepoint.
-- 
-- Read more: <a class="" target="_blank" rel="noreferrer" href="https://intercom.help/medialakeai/en/articles/8225270-setting-up-sharepoint-integration">Sharepoint documentation</a>

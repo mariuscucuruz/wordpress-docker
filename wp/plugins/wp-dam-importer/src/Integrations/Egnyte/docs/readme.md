@@ -1,3 +1,0 @@
-- Please see the documentation below on how to create a connection with Egnyte.
--
-- <a class="text-white" target="_blank" rel="noreferrer" href="https://support.medialakeapp.com/en/articles/9611017-setting-up-your-egnyte-integration">Egnyte documentation</a>

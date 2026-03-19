@@ -1,3 +1,0 @@
-- Please see the documentation below on how to create a connection with Nuxeo.
--
-- <a class="text-white" target="_blank" rel="noreferrer" href="https://support.medialakeapp.com/en/articles/9464402-nuxeo-integration">Nuxeo documentation</a>
