@@ -54,7 +54,7 @@ yarn-error.log
 
 # Docker
 .dockerignore
-Dockerfile
+# Dockerfile
 
 # OS
 Thumbs.db
