@@ -1,20 +1,18 @@
-version: '3'
 services:
   frontend:
     container_name: damimporter_wp
-    image: wordpress:6.4-fpm
+    image: wordpress:7.1-php8.5-fpm
     restart: unless-stopped
-    # build:
-    #   context: .
-    #   dockerfile: ./docker/wp/Dockerfile
-    #   args:
-    #     - UID=${UID:-(id -u)}
-    #     - GID=${GID:-(id -g)}
-    #     - WEBUSER=${WEBUSER:-(id -un)}
-    #     - WEBGROUP=${WEBGROUP:-(id -gn)}
+    build:
+      context: .
+      dockerfile: ./docker/wp/Dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+        - WEBUSER=${WEBUSER:-www-data}
+        - WEBGROUP=${WEBGROUP:-www-data}
     ports:
-      # - "${APP_PORT:-9000}:9000"
-      - "${APP_PORT:-8080}:80"
+      - ${APP_SERVER_PORT:-9000}:9000
     links:
       - database
     depends_on:
@@ -24,12 +22,17 @@ services:
       - internal
     volumes:
       - wp-data:/var/www/html
-      - ./wp/uploads:/var/www/html/wp-content/uploads:rw
-      #- ./wp/themes:/var/www/html/wp-content/themes:rw
+      - ./wp/favicon.ico:/var/www/html/favicon.ico:cached
+      - ./wp/humans.txt:/var/www/html/humans.txt:cached
+      - ./wp/robots.txt:/var/www/html/robots.txt:cached
+      - ./wp/uploads:/var/www/html/wp-content/uploads:delegated
+      - ./wp/themes:/var/www/html/wp-content/themes:cached
       - ./wp/plugins:/var/www/html/wp-content/plugins:rw
-      - ./php/:/usr/local/etc/php/conf.d/
+      - ./wp/upgrade:/var/www/html/wp-content/upgrade:rw
+      - ./wp/upgrade-temp-backup:/var/www/html/wp-content/upgrade-temp-backup:rw
+      - ./php/:/usr/local/etc/php/conf.d/:ro
     environment:
-      - WORDPRESS_DOMAIN="https://${APP_HOST:-website.uk}/"
+      - WORDPRESS_DOMAIN="https://${APP_HOST:-website.uk}:${APP_PORT:-8082}/"
       - WORDPRESS_DB_HOST=${DB_HOST:-database}
       - WORDPRESS_DB_PORT=${DB_PORT:-3306}
       - WORDPRESS_DB_NAME=${DB_NAME:-wordpress}
@@ -37,16 +40,46 @@ services:
       - WORDPRESS_DB_PASSWORD=${DB_PASSWORD:-wpdbpassword}
       - WORDPRESS_DEBUG=${WORDPRESS_DEBUG:-true}
       - WP_DEBUG_LOG={WORDPRESS_DEBUG:-true}
-      - WORDPRESS_CONFIG_EXTRA=
-          define('FS_METHOD', 'direct');
-          define('WP_HOME', 'https://${APP_HOST:-website.uk}/');
-          define('WP_SITEURL', 'https://${APP_HOST:-website.uk}/');
+      - WP_DEBUG=${WORDPRESS_DEBUG:-true}
+      - WP_DEBUG_DISPLAY=${WORDPRESS_DEBUG:-true}
+      - WORDPRESS_TABLE_PREFIX=${DB_TABLE_PREFIX:-wp_}
+      - WORDPRESS_ENABLE_REVERSE_PROXY=1
+      - WORDPRESS_ENABLE_XML_RPC=0
+      - WORDPRESS_DEBUG=${WORDPRESS_DEBUG:-1}
+      - WP_CACHE=true
+      - WORDPRESS_USERNAME=${APP_USER_ADMIN}
+      - WORDPRESS_PASSWORD=${APP_USER_PASS}
+      - WORDPRESS_EMAIL=${APP_USER_EMAIL}
+      - WORDPRESS_FIRST_NAME=${APP_PREFIX}
+      - WORDPRESS_LAST_NAME=${APP_USER_ADMIN}
+      - WORDPRESS_EMAIL=${APP_EMAIL}
+      - |
+        WORDPRESS_CONFIG_EXTRA=
+        define('WP_ALLOW_REPAIR', 'repair');
+        define('FS_METHOD', 'direct');
+        define('WP_HOME', 'https://${APP_HOST:-website.uk}:${APP_PORT:-8082}/');
+        define('WP_SITEURL', 'https://${APP_HOST:-website.uk}:${APP_PORT:-8082}/');
+        define('WORDPRESS_ENABLE_REVERSE_PROXY', true);
+        define('WORDPRESS_ENABLE_XML_RPC', false);
+        define('WPLANG', 'en_GB');
+        date_default_timezone_set('Europe/London');
+        # define('DOMAIN_CURRENT_SITE', '${APP_HOST:-website.uk}:${APP_PORT:-8082}');
+        # define('SITE_ID_CURRENT_SITE', 1);
+        # define('BLOG_ID_CURRENT_SITE', 1);
+        # define('WP_ALLOW_MULTISITE', ('${APP_MULTISITE}'=='1') ? true : false );
+        # define('MULTISITE', ('${APP_MULTISITE}'=='1') ? true : false);
+        # define('WORDPRESS_ENABLE_MULTISITE', ('${APP_MULTISITE}'=='1') ? true : false);
+        # define('SUBDOMAIN_INSTALL', ('${APP_MULTISITE}'=='1') ? true : false);
+        # define('PATH_CURRENT_SITE', '/');
       - TZ=Europe/London
 
   database:
     container_name: damimporter_db
     image: mariadb:latest
-    restart: always
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./docker/db/Dockerfile
     networks:
       - internal
     # command: [
@@ -68,18 +101,16 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - 10382:80
-      - 10543:443
-      - :443
+      - ${APP_PORT:-8083}:443
     networks:
       - public
     volumes_from:
       - frontend
     volumes:
       - ./nginx:/etc/nginx/conf.d/:ro
-      - ./ssl:/etc/letsencrypt/live/website.uk:delegated
+      - ./ssl:/etc/letsencrypt/live/${APP_HOST:-website.uk}:rw
     environment:
-      - NGINX_HOST=${APP_HOST:-www.website.uk}
+      - NGINX_HOST=${APP_HOST:-website.uk}
       - NGINX_PORT=443
       - TZ=Europe/London
 
@@ -92,4 +123,3 @@ networks:
     driver: bridge
   internal:
     driver: bridge
-
