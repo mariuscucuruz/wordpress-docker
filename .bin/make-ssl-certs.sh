@@ -1,7 +1,8 @@
 !#/bin/sh
 
-if [ -f .env ]
-then
+# run inside WP container to generate self-signed SSL certificates (local dev)
+
+if [ -f .env ]; then
   echo "Source all environment variables from .env file..."
   set -o allexport
   source .env
