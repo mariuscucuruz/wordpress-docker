@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CURRENT_DIR="$(dirname "$(readlink -f "$0")")"
-APP_ROOT_DIR="${CURRENT_DIR}/../../"
+APP_ROOT_DIR="${CURRENT_DIR}/../"
 
 if [ -f "${APP_ROOT_DIR}/.env" ]; then
   echo "Source all environment variables from .env file..."
