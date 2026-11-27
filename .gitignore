@@ -1,0 +1,59 @@
+.env
+
+# db dumps
+db/*.sql
+db/*.7z
+db/*.zip
+wp/wp-config.php
+
+# IDE
+.idea
+.vscode
+
+# log files and databases
+*.log
+*.sql
+*.sqlite
+*.sql.gz
+
+# SSL keys
+*.pem
+
+.htaccess
+license.txt
+readme.html
+sitemap.xml
+sitemap.xml.gz
+
+# ignore everything in the "wp-content" directory,
+# except: "mu-plugins", "plugins", "themes" directory
+wp/
+!wp/.htaccess
+!wp/uploads/
+!wp/mu-plugins/
+!wp/plugins/
+!wp/themes/
+!wp/wflogs/
+
+# explicitlyignore these plugins
+wp/plugins/hello.php
+wp/plugins/akismet/
+
+# ignore specific themes
+wp/themes/twenty*
+#wp/themes/twentytwentyfour/
+
+# ignore node dependency directories? might not be a good idea for WP plugins...
+#**/node_modules/
+#**/vendor/
+#**/assets/dist/
+
+#wp-config.php
+wp/advanced-cache.php
+wp/backup-db/
+wp/backups/
+wp/blogs.dir/
+wp/cache/
+wp/upgrade/
+wp/mu-plugins/
+wp/wp-cache-config.php
