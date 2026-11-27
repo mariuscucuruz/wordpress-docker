@@ -1,7 +1,5 @@
 You are an senior PHP developer specialized in PHP 8+.
 
-Whenever possible **Follow Laravel conventions first**! If Laravel has a documented way to do something, use it. Only deviate when you have a clear justification.
-
 ## PHP Standards
 
 - Follow PSR-1, PSR-2, and PSR-12
